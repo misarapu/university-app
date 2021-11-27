@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import UniversitiesList from "./components/universities/UniversitiesList";
+import UniversitiesSearchForm from "./components/universities/UniversitiesSearchForm";
 import countries from "../countries";
-import { getUniversities as fetchUnivesities} from "./api/university";
+import { getUniversities as fetchUniversities } from "./api/university";
 
 function Home() {
   const [universities, setUniversities] = useState([]);
@@ -16,44 +17,30 @@ function Home() {
 
   const getUniversities = () => {
     universities = [];
-    fetchUnivesities(filter.country, filter.name).then((res) =>
+    fetchUniversities(filter.country, filter.name).then((res) =>
       setUniversities(res)
     );
   };
 
   return (
-    <div>
-      <form
+    <div className="container-fluid py-5 px-xl-5">
+      <UniversitiesSearchForm
+        onNameChange={(e) => {
+          setFilter({ ...filter, ...{ name: e.target.value } });
+        }}
+        onCountryChange={(e) => {
+          setFilter({ ...filter, ...{ country: e.target.value } });
+        }}
         onSubmit={(e) => {
           e.preventDefault();
           getUniversities();
         }}
-      >
-        <input
-          type="search"
-          placeholder="university name"
-          onChange={(e) => {
-            setFilter({ ...filter, ...{ name: e.target.value } });
-          }}
-        ></input>
-        <select
-          defaultValue=""
-          onChange={(e) => {
-            setFilter({ ...filter, ...{ country: e.target.value } });
-          }}
-        >
-          <option value="">---</option>
-          {countries.map((c) => (
-            <option key={c.code} value={c.name}>
-              {c.name}
-            </option>
-          ))}
-        </select>
-        <button type="submit" value="Search">
-          Search
-        </button>
-      </form>
-      <UniversitiesList universities={universities} />
+      />
+      <div className="row mt-4">
+        <div className="col">
+          <UniversitiesList universities={universities} />
+        </div>
+      </div>
     </div>
   );
 }

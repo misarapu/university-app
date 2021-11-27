@@ -1,14 +1,22 @@
 function UniversityItem(props) {
-  var webpageKey = 0;
+  var webpageKey = 1;
   return (
-    <li>
-      <p>{props.name}</p>
-      <p>{props.country}</p>
-      {props.webpages.map((p) => (
-        <a key={webpageKey++} href={p} target="_blank">
-          {"Home " + webpageKey}
-        </a>
-      ))}
+    <li className="list-group-item">
+      <div className="float-start">
+        {props.name}, {props.country}
+      </div>
+      <div className="float-end">
+        {props.webpages.map((p) => (
+          <a
+            key={webpageKey++}
+            href={p}
+            className="link-primary px-2"
+            target="_blank"
+          >
+            {"Link #" + webpageKey}
+          </a>
+        ))}
+      </div>
     </li>
   );
 }
