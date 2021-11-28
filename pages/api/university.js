@@ -4,9 +4,9 @@ export async function getUniversities(country, name) {
   if (name) queryParams.push("name=" + name);
   if (queryParams.length == 0) return [];
 
-  let res = await fetch(
+  const response = await fetch(
     "http://universities.hipolabs.com/search?" + queryParams.join("&")
   );
 
-  return await res.json();
+  return await response.json();
 }

@@ -3,6 +3,7 @@ import countries from "../../../countries";
 function UniversitiesSearchForm(props) {
   return (
     <form className="row" onSubmit={props.onSubmit}>
+      {/* univesity name input */}
       <div className="col-md-6">
         <input
           type="search"
@@ -11,6 +12,7 @@ function UniversitiesSearchForm(props) {
           onChange={props.onNameChange}
         />
       </div>
+      {/* countries select */}
       <div className="col-md-4">
         <select
           className="form-select form-select-lg"
@@ -27,6 +29,7 @@ function UniversitiesSearchForm(props) {
           ))}
         </select>
       </div>
+      {/* submit */}
       <div className="col-md-2">
         <button
           type="submit"
